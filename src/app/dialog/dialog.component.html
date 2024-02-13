@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>{{ nameWindow }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="userForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Student full name</mat-label>
+      <input matInput formControlName="fullName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Country</mat-label>
+      <input matInput formControlName="country" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Teacher full name</mat-label>
+      <input matInput formControlName="teacherFullName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput formControlName="contractDate" [matDatepicker]="picker" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Contract</mat-label>
+      <input matInput placeholder="$" formControlName="contractMoney" />
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="Partially paid">Partially paid</mat-option>
+        <mat-option value="Unpaid">Unpaid</mat-option>
+        <mat-option value="Fully paid">Fully paid</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div mat-dialog-actions [align]="'end'">
+      <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="addUser()"
+      >
+        {{ actionBtn }}
+      </button>
+    </div>
+  </form>
+</div>

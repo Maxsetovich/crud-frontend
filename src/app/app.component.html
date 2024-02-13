@@ -1,0 +1,93 @@
+<div style="width: 90%; margin: auto">
+  <p>
+    <mat-toolbar>
+      <span>List of Uzinfocom students</span>
+      <span class="example-spacer"></span>
+      <button
+        pButton
+        pRipple
+        type="button"
+        (click)="openDialog()"
+        label="+ Add Students"
+        class="p-button-success"
+      ></button>
+    </mat-toolbar>
+  </p>
+
+  <p-table
+    #dt
+    [value]="users"
+    [rows]="5"
+    [paginator]="true"
+    [globalFilterFields]="['fullName']"
+    responsiveLayout="scroll"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Search by name"
+            style="padding: 10px 10px 10px 30px"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="fullName">
+          Full name <p-sortIcon field="fullName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="country">
+          Country <p-sortIcon field="country"></p-sortIcon>
+        </th>
+        <th pSortableColumn="teacherFullName">
+          Teacher <p-sortIcon field="teacherFullName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="contractDate">
+          Date <p-sortIcon field="contractDate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="contractMoney">
+          Contract <p-sortIcon field="contractMoney"></p-sortIcon>
+        </th>
+        <th pSortableColumn="status">
+          Status <p-sortIcon field="status"></p-sortIcon>
+        </th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.fullName }}</td>
+        <td>{{ user.country }}</td>
+        <td>{{ user.teacherFullName }}</td>
+        <td>{{ user.contractDate | date }}</td>
+        <td>{{ user.contractMoney | currency }}</td>
+        <td>{{ user.status }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="editUser(user)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteUser(user.id)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
